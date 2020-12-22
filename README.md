@@ -7,5 +7,5 @@ Arguments after the `--` will be passed to golangci-lint.
 Example
 
 ```bash
-go run . -- run
+go run ./lint -- run
 ```
