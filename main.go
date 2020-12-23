@@ -55,6 +55,8 @@ func getLinter() (string, error) {
 	ext := "tar.gz"
 	bin = filepath.Join(build.Default.GOPATH, "bin", "golangci-lint")
 
+	_ = os.MkdirAll(filepath.Dir(bin), 0755)
+
 	if runtime.GOOS == "windows" {
 		ext = "zip"
 		bin += ".exe"
