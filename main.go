@@ -22,12 +22,12 @@ import (
 
 var ver = flag.String("v", "1.33.0", "version of the golangci-lint to use")
 
-var logger = log.New(os.Stdout, "", 0)
+var Logger = log.New(os.Stdout, "", 0)
 
 func Lint() {
 	bin, err := getLinter()
 	if err != nil {
-		logger.Fatalln(err)
+		Logger.Fatalln(err)
 	}
 
 	cmd := exec.Command(bin, getLintArgs()...)
@@ -37,7 +37,7 @@ func Lint() {
 
 	err = cmd.Run()
 	if err != nil {
-		logger.Fatalln(err)
+		Logger.Fatalln(err)
 	}
 }
 
@@ -98,7 +98,7 @@ func getLintArgs() []string {
 }
 
 func download(u string) error {
-	logger.Println("Download golangci-lint:", u)
+	Logger.Println("Download golangci-lint:", u)
 
 	zipPath := filepath.Join(os.TempDir(), path.Base(u))
 
@@ -134,7 +134,7 @@ func download(u string) error {
 		return err
 	}
 
-	logger.Println("Downloaded:", zipPath)
+	Logger.Println("Downloaded:", zipPath)
 
 	err = zipFile.Close()
 	if err != nil {
@@ -248,13 +248,13 @@ func (p *progresser) Write(b []byte) (n int, err error) {
 	n = len(b)
 
 	if p.count == 0 {
-		_, _ = fmt.Fprint(logger.Writer(), "Progress:")
+		_, _ = fmt.Fprint(Logger.Writer(), "Progress:")
 	}
 
 	p.count += n
 
 	if p.count == p.size {
-		_, _ = fmt.Fprintln(logger.Writer(), " 100%")
+		_, _ = fmt.Fprintln(Logger.Writer(), " 100%")
 		return
 	}
 
@@ -263,7 +263,7 @@ func (p *progresser) Write(b []byte) (n int, err error) {
 	}
 
 	p.last = time.Now()
-	_, _ = fmt.Fprintf(logger.Writer(), " %02d%%", p.count*100/p.size)
+	_, _ = fmt.Fprintf(Logger.Writer(), " %02d%%", p.count*100/p.size)
 
 	return
 }
