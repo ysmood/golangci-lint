@@ -60,7 +60,7 @@ func getLintArgs() []string {
 	os.Args = args
 
 	if len(lintArgs) == 0 {
-		lintArgs = []string{"run"}
+		lintArgs = []string{"run", "--fix"}
 	}
 
 	return lintArgs

@@ -53,6 +53,8 @@ func (ltr *Linter) Lint(args ...string) error {
 		return err
 	}
 
+	ltr.Logger.Println("golangci-lint", strings.Join(args, " "))
+
 	cmd := exec.Command(ltr.binPath(), args...)
 	cmd.Stdin = ltr.Stdin
 	cmd.Stdout = ltr.Stdout
