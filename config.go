@@ -1,3 +1,6 @@
+package main
+
+const defaultConf = `
 run:
   skip-dirs-use-default: false
 
@@ -13,3 +16,5 @@ gocyclo:
 
 issues:
   exclude-use-default: false
+
+`
