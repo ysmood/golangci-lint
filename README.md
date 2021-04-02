@@ -4,7 +4,7 @@ A manager to automate golangci-lint, such as auto-download the executable of gol
 
 ## Install and run
 
-If the Go version is greater than v1.17:
+If the Go version is greater than [v1.17](https://github.com/golang/go/issues/42088):
 
 ```bash
 go run github.com/ysmood/golangci-lint@latest
