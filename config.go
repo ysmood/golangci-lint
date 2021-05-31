@@ -10,6 +10,7 @@ linters:
     - golint
     - gocyclo
     - misspell
+    - bodyclose
 
 gocyclo:
   min-complexity: 15
