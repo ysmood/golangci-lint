@@ -7,7 +7,7 @@ run:
 linters:
   enable:
     - gofmt
-    - golint
+    - revive
     - gocyclo
     - misspell
     - bodyclose
