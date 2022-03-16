@@ -20,7 +20,7 @@ import (
 )
 
 // DefaultVer of golangci-lint to use
-const DefaultVer = "1.42.0"
+const DefaultVer = "1.44.2"
 
 // Linter ...
 type Linter struct {
@@ -53,9 +53,11 @@ func (ltr *Linter) Lint(args ...string) error {
 		return err
 	}
 
-	ltr.Logger.Println("golangci-lint", strings.Join(args, " "))
+	bin := ltr.binPath()
 
-	cmd := exec.Command(ltr.binPath(), args...)
+	ltr.Logger.Println(bin, strings.Join(args, " "))
+
+	cmd := exec.Command(bin, args...)
 	cmd.Stdin = ltr.Stdin
 	cmd.Stdout = ltr.Stdout
 	cmd.Stderr = ltr.Stderr
