@@ -15,7 +15,7 @@ import (
 	"github.com/ysmood/fetchup"
 )
 
-// DefaultVer of golangci-lint to use
+// DefaultVer of golangci-lint to use.
 const DefaultVer = "1.52.2"
 
 // Linter ...
@@ -31,7 +31,7 @@ type Linter struct {
 	Stderr *os.File
 }
 
-// New default linter
+// New default linter.
 func New() *Linter {
 	return &Linter{
 		Version: DefaultVer,
@@ -42,7 +42,7 @@ func New() *Linter {
 	}
 }
 
-// Lint downloads and runs the golangci-lint
+// Lint downloads and runs the golangci-lint.
 func (ltr *Linter) Lint(args ...string) error {
 	err := ltr.GetLinter()
 	if err != nil {
@@ -61,7 +61,7 @@ func (ltr *Linter) Lint(args ...string) error {
 	return cmd.Run()
 }
 
-// GetLinter downloads the the golangci-lint if not exists
+// GetLinter downloads the golangci-lint if not exists.
 func (ltr *Linter) GetLinter() error {
 	bin := ltr.binPath()
 
@@ -72,13 +72,15 @@ func (ltr *Linter) GetLinter() error {
 
 	ext := "tar.gz"
 
-	_ = os.MkdirAll(filepath.Dir(bin), 0755)
+	const defaultPerm = 0o750
+
+	_ = os.MkdirAll(filepath.Dir(bin), defaultPerm)
 
 	if runtime.GOOS == "windows" {
 		ext = "zip"
 	}
 
-	u := fmt.Sprintf(
+	binURL := fmt.Sprintf(
 		"https://github.com/golangci/golangci-lint/releases/download/v%s/golangci-lint-%s-%s-%s.%s",
 		ltr.Version,
 		ltr.Version,
@@ -87,17 +89,18 @@ func (ltr *Linter) GetLinter() error {
 		ext,
 	)
 
-	ltr.Logger.Println("Download golangci-lint:", u)
+	ltr.Logger.Println("Download golangci-lint:", binURL)
 
 	dir, err := ioutil.TempDir("", "*")
 	if err != nil {
 		return err
 	}
 
-	err = fetchup.New(dir, u).Fetch()
+	err = fetchup.New(dir, binURL).Fetch()
 	if err != nil {
 		return err
 	}
+
 	defer func() { _ = os.RemoveAll(dir) }()
 
 	err = fetchup.StripFirstDir(dir)
@@ -111,6 +114,7 @@ func (ltr *Linter) GetLinter() error {
 func (ltr *Linter) binPath() string {
 	dir := filepath.Join(build.Default.GOPATH, "bin")
 	p := filepath.Join(dir, fmt.Sprintf("golangci-lint%s", ltr.Version))
+
 	return normalizeBin(p)
 }
 
@@ -118,5 +122,6 @@ func normalizeBin(b string) string {
 	if runtime.GOOS == "windows" {
 		b += ".exe"
 	}
+
 	return b
 }
