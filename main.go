@@ -13,7 +13,7 @@ import (
 	"runtime"
 	"strconv"
 
-	lint "github.com/ysmood/golangci-lint/pkg/lint"
+	lint "github.com/ysmood/golangci-lint/pkg/lint" //nolint: depguard
 )
 
 //go:embed .golangci.yml

@@ -12,11 +12,11 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/ysmood/fetchup"
+	"github.com/ysmood/fetchup" //nolint: depguard
 )
 
 // DefaultVer of golangci-lint to use.
-const DefaultVer = "1.52.2"
+const DefaultVer = "1.53.3"
 
 // Linter ...
 type Linter struct {
