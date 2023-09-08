@@ -16,7 +16,7 @@ import (
 )
 
 // DefaultVer of golangci-lint to use.
-const DefaultVer = "1.53.3"
+const DefaultVer = "1.54.2"
 
 // Linter ...
 type Linter struct {
