@@ -23,8 +23,9 @@ linters:
     - nosnakecase
     - scopelint
 
-gocyclo:
-  min-complexity: 15
+linters-settings:
+  gocyclo:
+    min-complexity: 15
 
 issues:
   exclude-use-default: false
