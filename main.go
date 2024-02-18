@@ -4,7 +4,7 @@ package main
 import (
 	_ "embed"
 	"flag"
-	"io/ioutil"
+	"io"
 	"log"
 	"os"
 	"os/exec"
@@ -35,7 +35,7 @@ func main() {
 	ltr.Version = *ver
 
 	if *quiet {
-		ltr.Logger.SetOutput(ioutil.Discard)
+		ltr.Logger.SetOutput(io.Discard)
 	}
 
 	initDefaultConf()
@@ -97,7 +97,7 @@ func initDefaultConf() {
 
 	const perm = 0o600
 
-	_ = ioutil.WriteFile(path, []byte(defaultConf), perm)
+	_ = os.WriteFile(path, []byte(defaultConf), perm)
 }
 
 func needTidy() bool {

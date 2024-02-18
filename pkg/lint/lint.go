@@ -4,7 +4,6 @@ package lint
 import (
 	"fmt"
 	"go/build"
-	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
@@ -16,7 +15,7 @@ import (
 )
 
 // DefaultVer of golangci-lint to use.
-const DefaultVer = "1.54.2"
+const DefaultVer = "1.56.2"
 
 // Linter ...
 type Linter struct {
@@ -91,7 +90,7 @@ func (ltr *Linter) GetLinter() error {
 
 	ltr.Logger.Println("Download golangci-lint:", binURL)
 
-	dir, err := ioutil.TempDir("", "*")
+	dir, err := os.MkdirTemp("", "*")
 	if err != nil {
 		return err
 	}
@@ -113,7 +112,7 @@ func (ltr *Linter) GetLinter() error {
 
 func (ltr *Linter) binPath() string {
 	dir := filepath.Join(build.Default.GOPATH, "bin")
-	p := filepath.Join(dir, fmt.Sprintf("golangci-lint%s", ltr.Version))
+	p := filepath.Join(dir, "golangci-lint"+ltr.Version)
 
 	return normalizeBin(p)
 }
