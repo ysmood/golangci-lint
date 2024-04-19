@@ -26,3 +26,4 @@ linters-settings:
 
 issues:
   exclude-use-default: false
+  exclude-dirs-use-default: false
