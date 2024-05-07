@@ -19,6 +19,8 @@ linters:
     - maligned
     - nosnakecase
     - scopelint
+    - gomnd
+    - execinquery
 
 linters-settings:
   gocyclo:
