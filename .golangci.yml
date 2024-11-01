@@ -9,23 +9,10 @@ linters:
     - musttag
 
     # Deprecated ones:
-    - structcheck
-    - interfacer
-    - deadcode
-    - varcheck
-    - ifshort
-    - exhaustivestruct
-    - golint
-    - maligned
-    - nosnakecase
-    - scopelint
-    - gomnd
     - execinquery
+    - gomnd
+    - exportloopref
 
 linters-settings:
   gocyclo:
     min-complexity: 15
-
-issues:
-  exclude-use-default: false
-  exclude-dirs-use-default: false
