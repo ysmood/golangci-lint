@@ -9,9 +9,7 @@ linters:
     - musttag
 
     # Deprecated ones:
-    - execinquery
-    - gomnd
-    - exportloopref
+    - tenv
 
 linters-settings:
   gocyclo:
